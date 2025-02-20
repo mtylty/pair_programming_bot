@@ -1,26 +1,26 @@
-display_information:
-  name: Pair Programming Bot
-  description: Matches developers for pair programming sessions
-  background_color: "#2c2d30"
-
-features:
-  bot_user:
-    display_name: Pair Programming Bot
-    always_online: true
-
-oauth_config:
-  scopes:
-    bot:
-      - chat:write
-      - im:write
-      - groups:write
-      - channels:read
-      - users:read
-
-settings:
-  interactivity:
-    is_enabled: true
-    request_url: https://YOUR-RENDER-URL/api/slack/action
-  org_deploy_enabled: false
-  socket_mode_enabled: false
-  token_rotation_enabled: false
+services:
+  - type: web
+    name: pair-programming-bot
+    runtime: ruby
+    plan: free
+    buildCommand: bundle install
+    startCommand: bundle exec rackup config.ru -p $PORT -o 0.0.0.0
+    envVars:
+      - key: MONGODB_URI
+        sync: false
+      - key: SLACK_CLIENT_ID
+        sync: false
+      - key: SLACK_CLIENT_SECRET
+        sync: false
+      - key: SLACK_SIGNING_SECRET
+        sync: false
+      - key: SLACK_OAUTH_SCOPE
+        value: chat:write,im:write,groups:write,channels:read,users:read
+      - key: GOOGLE_CLIENT_ID
+        sync: false
+      - key: GOOGLE_CLIENT_SECRET
+        sync: false
+      - key: PAIR_PROGRAMMING_CHANNEL_ID
+        sync: false
+      - key: RACK_ENV
+        value: production
