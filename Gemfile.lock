@@ -223,6 +223,7 @@ DEPENDENCIES
   google-apis-calendar_v3
   mongoid
   puma
+  rack
   rufus-scheduler
   sinatra
   slack-ruby-bot-server
